@@ -54,121 +54,114 @@ pipeline {
     // ─────────────────────────────────────────────────
     // STAGES
     // ─────────────────────────────────────────────────
-    stages {
+        stages {
 
-        // ── Stage 1 : Récupérer le code ──────────────
-        stage('Checkout') {
-            steps {
-                checkout scm
-                echo "Branch  : ${env.GIT_BRANCH}"
-                echo "Commit  : ${env.GIT_COMMIT}"
-            }
-        }
-
-        // ── Stage 2 : Compiler ───────────────────────
-        stage('Build') {
-            steps {
-                bat 'mvn clean compile -B'
-                // -B = batch mode (pas de couleurs, logs Jenkins-friendly)
-            }
-        }
-
-        // ── Stage 3 : Tests unitaires ─────────────────
-        stage('Tests unitaires') {
-            when {
-                // Sauter si le paramètre SKIP_TESTS est activé
-                not { expression { return params.SKIP_TESTS } }
-            }
-            steps {
-                bat 'mvn test -B'
-            }
-            post {
-                always {
-                    // Publier les résultats dans Jenkins (graphique de tendance)
-                    junit '**/target/surefire-reports/*.xml'
-                }
-                failure {
-                    echo 'Tests unitaires en ECHEC — vérifier les logs ci-dessus'
+            stage('Checkout') {
+                steps {
+                    checkout scm
+                    echo "Branch  : ${env.GIT_BRANCH}"
+                    echo "Commit  : ${env.GIT_COMMIT}"
                 }
             }
-        }
 
-        // ── Stage 4 : Tests d'intégration ────────────
-        stage('Tests intégration') {
-            when {
-                not { expression { return params.SKIP_TESTS } }
-            }
-            steps {
-                bat 'mvn verify -Dsurefire.skip=true -B'
-            }
-            post {
-                always {
-                    junit '**/target/failsafe-reports/*.xml'
+            stage('Build') {
+                steps {
+                    dir('projet_jenkins/ICDE848') {
+                        bat 'mvn clean compile -B'
+                    }
                 }
             }
-        }
 
-        // ── Stage 5 : Couverture de code ─────────────
-        stage('Couverture JaCoCo') {
-            steps {
-                bat 'mvn jacoco:report -B'
+            stage('Tests unitaires') {
+                when {
+                    not { expression { return params.SKIP_TESTS } }
+                }
+                steps {
+                    dir('projet_jenkins/ICDE848') {
+                        bat 'mvn test -B'
+                    }
+                }
+                post {
+                    always {
+                        junit '**/target/surefire-reports/*.xml'
+                    }
+                    failure {
+                        echo 'Tests unitaires en ECHEC — vérifier les logs ci-dessus'
+                    }
+                }
             }
-            post {
-                always {
-                    jacoco(
-                        execPattern:   '**/target/jacoco.exec',
-                        classPattern:  '**/target/classes',
-                        sourcePattern: '**/src/main/java',
-                        minimumLineCoverage: '70'
+
+            stage('Tests intégration') {
+                when {
+                    not { expression { return params.SKIP_TESTS } }
+                }
+                steps {
+                    dir('projet_jenkins/ICDE848') {
+                        bat 'mvn verify -Dsurefire.skip=true -B'
+                    }
+                }
+                post {
+                    always {
+                        junit '**/target/failsafe-reports/*.xml'
+                    }
+                }
+            }
+
+            stage('Couverture JaCoCo') {
+                steps {
+                    dir('projet_jenkins/ICDE848') {
+                        bat 'mvn jacoco:report -B'
+                    }
+                }
+                post {
+                    always {
+                        jacoco(
+                            execPattern:   '**/target/jacoco.exec',
+                            classPattern:  '**/target/classes',
+                            sourcePattern: '**/src/main/java',
+                            minimumLineCoverage: '70'
+                        )
+                    }
+                }
+            }
+
+            stage('Qualité') {
+                steps {
+                    dir('projet_jenkins/ICDE848') {
+                        bat 'mvn checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs -B'
+                    }
+                }
+                post {
+                    always {
+                        recordIssues(
+                            enabledForFailure: true,
+                            tools: [
+                                checkStyle(pattern: '**/checkstyle-result.xml'),
+                                pmdParser(pattern:  '**/pmd.xml'),
+                                cpd(pattern:        '**/cpd.xml'),
+                                spotBugs(pattern:   '**/spotbugsXml.xml')
+                            ],
+                            qualityGates: [[
+                                threshold: 10,
+                                type: 'TOTAL',
+                                unstable: true
+                            ]]
+                        )
+                    }
+                }
+            }
+
+            stage('Archive') {
+                steps {
+                    archiveArtifacts(
+                        artifacts:   '**/target/*.jar',
+                        fingerprint: true,
+                        allowEmptyArchive: false
                     )
+                    echo "Artefact archivé avec succès"
                 }
             }
         }
-
-        // ── Stage 6 : Analyse qualité ─────────────────
-        stage('Qualité') {
-            steps {
-                bat '''
-                    mvn checkstyle:checkstyle \
-                        pmd:pmd \
-                        pmd:cpd \
-                        spotbugs:spotbugs \
-                        -B
-                '''
-            }
-            post {
-                always {
-                    recordIssues(
-                        enabledForFailure: true,
-                        tools: [
-                            checkStyle(pattern: '**/checkstyle-result.xml'),
-                            pmdParser(pattern:  '**/pmd.xml'),
-                            cpd(pattern:        '**/cpd.xml'),
-                            spotBugs(pattern:   '**/spotbugsXml.xml')
-                        ],
-                        // Rendre le build UNSTABLE si > 10 avertissements
-                        qualityGates: [[
-                            threbatold: 10,
-                            type: 'TOTAL',
-                            unstable: true
-                        ]]
-                    )
-                }
-            }
-        }
-
-        // ── Stage 7 : Archiver le JAR ─────────────────
-        stage('Archive') {
-            steps {
-                archiveArtifacts(
-                    artifacts:   '**/target/*.jar',
-                    fingerprint: true,
-                    allowEmptyArchive: false
-                )
-                echo "Artefact archivé avec succès"
-            }
-        }
-
         // ── Stage 8 : Validation manuelle avant PROD ──
         // (Décommenter pour TP4 – Input step)
         /*
