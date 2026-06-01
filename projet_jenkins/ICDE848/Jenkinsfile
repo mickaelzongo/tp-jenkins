@@ -189,7 +189,7 @@ pipeline {
         }
         */
 
-    } // fin stages
+     // fin stages
 
     // ─────────────────────────────────────────────────
     // POST — Actions après tous les stages
