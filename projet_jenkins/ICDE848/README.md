@@ -78,7 +78,7 @@ Après `mvn clean verify checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs
 ## 🔧 Configuration Jenkins requise
 
 ### Global Tool Configuration
-- JDK : nom `JDK17`, Java 17
+- JDK : nom `JDK21`, Java 17
 - Maven : nom `Maven3`, version 3.9.x
 
 ### Plugins à installer
