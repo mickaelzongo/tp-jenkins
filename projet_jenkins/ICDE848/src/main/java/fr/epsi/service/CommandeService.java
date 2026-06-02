@@ -54,4 +54,14 @@ public class CommandeService {
         else if (total < 200) return "MOYENNE";
         else                  return "GRANDE";
     }
+
+    // // Méthode volontairement mal écrite
+    // public void methodeTest() {
+    //     String variableInutile = "je ne sers à rien";
+    //     try {
+    //         int x = 1 / 0;
+    //     } catch (Exception e) {
+    //         // catch vide intentionnel
+    //     }
+    // }
 }

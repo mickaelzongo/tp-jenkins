@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="C:\Users\OMEN\Desktop\tp-jenkins\projet_jenkins\ICDE848\src\main\java\fr\epsi\model\Article.java">
+<error line="17" column="29" severity="warning" message="&apos;{&apos; à la colonne 29 devrait avoir un saut de ligne après." source="com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck"/>
+<error line="18" column="29" severity="warning" message="&apos;{&apos; à la colonne 29 devrait avoir un saut de ligne après." source="com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck"/>
+</file>
+<file name="C:\Users\OMEN\Desktop\tp-jenkins\projet_jenkins\ICDE848\src\main\java\fr\epsi\model\Panier.java">
+</file>
+<file name="C:\Users\OMEN\Desktop\tp-jenkins\projet_jenkins\ICDE848\src\main\java\fr\epsi\service\CommandeService.java">
+<error line="53" column="9" severity="warning" message="L&apos;instruction &apos;if&apos; devrait utiliser des accolades (&apos;{&apos; et &apos;}&apos;)." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="54" column="14" severity="warning" message="L&apos;instruction &apos;if&apos; devrait utiliser des accolades (&apos;{&apos; et &apos;}&apos;)." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="55" column="9" severity="warning" message="L&apos;instruction &apos;else&apos; devrait utiliser des accolades (&apos;{&apos; et &apos;}&apos;)." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+</checkstyle>
