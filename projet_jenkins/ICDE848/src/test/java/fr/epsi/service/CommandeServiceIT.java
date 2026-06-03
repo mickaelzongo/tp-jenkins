@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Assertions;
+
 /**
  * Tests d'INTÉGRATION du CommandeService.
  *
@@ -77,5 +79,59 @@ class CommandeServiceIT {
         // THEN
         assertEquals(0.0,    apresRemise, 0.001);
         assertEquals("PETITE", categorie);
+    }
+    // test integartion ajouter
+    // panier vide
+    @Test
+    @DisplayName("Panier vide -> total 0 -> catégorie PETITE")
+    void pipelineComplete_PanierVide() {
+        Panier panier = new Panier();
+
+        double total = service.calculerTotal(panier);
+        double apresRemise = service.appliquerRemise(total, 10);
+        String categorie = service.categoriserCommande(apresRemise);
+
+        Assertions.assertEquals(0.0, total, 0.001);
+        Assertions.assertEquals(0.0, apresRemise, 0.001);
+        Assertions.assertEquals("PETITE", categorie);
+    }
+
+    @Test
+    @DisplayName("Montant exactement au seuil")
+    void pipelineComplete_SeuilCategorie() {
+        Panier panier = new Panier();
+        panier.ajouter(new Article("Produit", 100.0), 1);
+
+        double total = service.calculerTotal(panier);
+
+        Assertions.assertEquals("MOYENNE",
+                service.categoriserCommande(total));
+    }
+
+    @Test
+    @DisplayName("Panier avec plusieurs articles")
+    void pipelineComplete_MultiArticles() {
+        Panier panier = new Panier();
+
+        panier.ajouter(new Article("A", 10.0), 2);
+        panier.ajouter(new Article("B", 20.0), 3);
+        panier.ajouter(new Article("C", 5.0), 4);
+
+        double total = service.calculerTotal(panier);
+
+        Assertions.assertEquals(100.0, total, 0.001);
+    }  
+
+    @Test
+    @DisplayName("Aucune remise appliquée")
+    void pipelineComplete_SansRemise() {
+        Panier panier = new Panier();
+        panier.ajouter(new Article("Livre", 20.0), 5);
+
+        double total = service.calculerTotal(panier);
+        double apresRemise = service.appliquerRemise(total, 0);
+
+        Assertions.assertEquals(100.0, total, 0.001);
+        Assertions.assertEquals(100.0, apresRemise, 0.001);
     }
 }
