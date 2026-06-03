@@ -151,6 +151,32 @@ pipeline {
                 }
             }
 
+
+            // ── Stage 7 : Tests UI Selenium ──────────────────
+            stage('Tests UI Selenium') {
+                steps {
+                    dir('tp-selenium') {
+                        bat '''
+                            python -m venv venv
+                            venv\\Scripts\\activate.bat && pip install -r requirements.txt --quiet && pytest tests/ -v --junitxml=rapport-selenium.xml --html=rapport-selenium.html --self-contained-html
+                        '''
+                    }
+                }
+                post {
+                    always {
+                        junit 'tp-selenium/rapport-selenium.xml'
+                        archiveArtifacts(
+                            artifacts: 'tp-selenium/rapport-selenium.html',
+                            allowEmptyArchive: true
+                        )
+                    }
+                    failure {
+                        echo 'Tests UI en échec — consulter rapport-selenium.html'
+                    }
+                }
+            }
+
+
             stage('Archive') {
                 steps {
                     archiveArtifacts(

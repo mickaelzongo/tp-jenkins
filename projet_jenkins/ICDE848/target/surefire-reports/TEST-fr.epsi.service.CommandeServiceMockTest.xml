@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.epsi.service.CommandeServiceTest" time="0.133" tests="18" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.epsi.service.CommandeServiceMockTest" time="3.334" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,22 +58,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="calculerTVA_MontantNegatif_LeveException" classname="fr.epsi.service.CommandeServiceTest" time="0.014"/>
-  <testcase name="appliquerRemise_RemiseSupCent_LeveException" classname="fr.epsi.service.CommandeServiceTest" time="0.013"/>
-  <testcase name="categoriser_CentCinquanteEuros_RetourneMoyenne" classname="fr.epsi.service.CommandeServiceTest" time="0.011"/>
-  <testcase name="calculerTotal_PanierVide_LeveException" classname="fr.epsi.service.CommandeServiceTest" time="0.005"/>
-  <testcase name="calculerTotal_PlusieursArticles_RetourneSomme" classname="fr.epsi.service.CommandeServiceTest" time="0.005"/>
-  <testcase name="calculerTVA_CentEuros_RetourneVingt" classname="fr.epsi.service.CommandeServiceTest" time="0.004"/>
-  <testcase name="calculerTotal_PanierNull_LeveException" classname="fr.epsi.service.CommandeServiceTest" time="0.004"/>
-  <testcase name="calculerTVA_UnCentime_RetourneZero" classname="fr.epsi.service.CommandeServiceTest" time="0.004"/>
-  <testcase name="calculerTVA_Zero_RetourneZero" classname="fr.epsi.service.CommandeServiceTest" time="0.004"/>
-  <testcase name="appliquerRemise_DixPourcent_RetourneQuatreVingtDix" classname="fr.epsi.service.CommandeServiceTest" time="0.002"/>
-  <testcase name="appliquerRemise_RemiseNegative_LeveException" classname="fr.epsi.service.CommandeServiceTest" time="0.003"/>
-  <testcase name="categoriser_CinqCentsEuros_RetourneGrande" classname="fr.epsi.service.CommandeServiceTest" time="0.0"/>
-  <testcase name="categoriser_DeuxCentsEuros_RetourneGrande" classname="fr.epsi.service.CommandeServiceTest" time="0.003"/>
-  <testcase name="calculerTotal_TroisStylos_RetourneSix" classname="fr.epsi.service.CommandeServiceTest" time="0.002"/>
-  <testcase name="categoriser_TrenteEuros_RetournePetite" classname="fr.epsi.service.CommandeServiceTest" time="0.001"/>
-  <testcase name="categoriser_CinquanteEuros_RetourneMoyenne" classname="fr.epsi.service.CommandeServiceTest" time="0.002"/>
-  <testcase name="calculerTVA_MontantDecimal_RetourneArrondi" classname="fr.epsi.service.CommandeServiceTest" time="0.0"/>
-  <testcase name="appliquerRemise_ZeroPourcent_RetourneTotalInchange" classname="fr.epsi.service.CommandeServiceTest" time="0.002"/>
+  <testcase name="commandeRealisable_StockInsuffisant_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="3.181">
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\OMEN\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="commandeRealisable_StockSuffisant_RetourneTrue" classname="fr.epsi.service.CommandeServiceMockTest" time="0.031"/>
+  <testcase name="commandeRealisable_SansRepository_LeveException" classname="fr.epsi.service.CommandeServiceMockTest" time="0.008"/>
+  <testcase name="commandeRealisable_StockEgalDemande_RetourneTrue" classname="fr.epsi.service.CommandeServiceMockTest" time="0.006"/>
+  <testcase name="commandeRealisable_StockZero_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="0.003"/>
 </testsuite>

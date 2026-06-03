@@ -1,2 +1,3 @@
 fr\epsi\service\CommandeServiceIT.class
 fr\epsi\service\CommandeServiceTest.class
+fr\epsi\service\CommandeServiceMockTest.class

@@ -1,5 +1,6 @@
 package fr.epsi.service;
 
+import fr.epsi.repository.StockRepository;
 import fr.epsi.model.Article;
 import fr.epsi.model.Panier;
 import java.util.Map;
@@ -55,13 +56,47 @@ public class CommandeService {
         else                  return "GRANDE";
     }
 
-    // // Méthode volontairement mal écrite
-    // public void methodeTest() {
-    //     String variableInutile = "je ne sers à rien";
-    //     try {
-    //         int x = 1 / 0;
-    //     } catch (Exception e) {
-    //         // catch vide intentionnel
-    //     }
-    // }
+    /**
+     * Calcule la TVA à 20% sur un montant donné.
+     *
+     * @param montant le montant HT
+     * @return la TVA arrondie à 2 décimales
+     * @throws IllegalArgumentException si le montant est négatif
+     */
+    public double calculerTVA(double montant) {
+        if (montant < 0) {
+            throw new IllegalArgumentException("Montant négatif : " + montant);
+        }
+        double tva = montant * 0.20;
+        return Math.round(tva * 100.0) / 100.0;
+    }
+
+    // Ajouter en attribut de classe
+    private StockRepository stockRepository;
+
+    // Constructeur sans dépendance (comportement existant inchangé)
+    public CommandeService() {
+        this.stockRepository = null;
+    }
+
+    // Nouveau constructeur avec injection de dépendance
+    public CommandeService(StockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
+
+    /**
+     * Vérifie si la commande est réalisable selon le stock disponible.
+     *
+     * @param article   l'article à commander
+     * @param quantite  la quantité demandée
+     * @return true si le stock est suffisant
+     * @throws IllegalStateException si aucun StockRepository n'est configuré
+     */
+    public boolean commandeRealisable(Article article, int quantite) {
+        if (stockRepository == null) {
+            throw new IllegalStateException("StockRepository non configuré");
+        }
+        int stockDisponible = stockRepository.getStock(article);
+        return stockDisponible >= quantite;
+    }
 }
