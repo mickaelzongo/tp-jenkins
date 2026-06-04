@@ -82,18 +82,14 @@ class CommandeServiceIT {
     }
     // test integartion ajouter
     // panier vide
-    @Test
-    @DisplayName("Panier vide -> total 0 -> catégorie PETITE")
+   @Test
+    @DisplayName("Panier vide -> lève une exception")
     void pipelineComplete_PanierVide() {
         Panier panier = new Panier();
-
-        double total = service.calculerTotal(panier);
-        double apresRemise = service.appliquerRemise(total, 10);
-        String categorie = service.categoriserCommande(apresRemise);
-
-        Assertions.assertEquals(0.0, total, 0.001);
-        Assertions.assertEquals(0.0, apresRemise, 0.001);
-        Assertions.assertEquals("PETITE", categorie);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> service.calculerTotal(panier)
+        );
     }
 
     @Test

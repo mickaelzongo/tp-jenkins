@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.epsi.service.CommandeServiceMockTest" time="3.334" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.epsi.service.CommandeServiceMockTest" time="3.157" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21.0.11\bin"/>
-    <property name="sun.java.command" value="C:\Users\OMEN\AppData\Local\Temp\surefire280418647907674740\surefirebooter-20260603232447615_3.jar C:\Users\OMEN\AppData\Local\Temp\surefire280418647907674740 2026-06-03T23-24-47_316-jvmRun1 surefire-20260603232447615_1tmp surefire_0-20260603232447615_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\OMEN\AppData\Local\Temp\surefire9323518639073001796\surefirebooter-20260604091846922_3.jar C:\Users\OMEN\AppData\Local\Temp\surefire9323518639073001796 2026-06-04T09-18-46_628-jvmRun1 surefire-20260604091846922_1tmp surefire_0-20260604091846922_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\OMEN\Desktop\tp-jenkins\projet_jenkins\ICDE848\target\test-classes;C:\Users\OMEN\Desktop\tp-jenkins\projet_jenkins\ICDE848\target\classes;C:\Users\OMEN\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\OMEN\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\OMEN\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\OMEN\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\OMEN\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\OMEN\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\OMEN\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\OMEN\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\OMEN\.m2\repository\org\mockito\mockito-junit-jupiter\5.5.0\mockito-junit-jupiter-5.5.0.jar;C:\Users\OMEN\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\OMEN\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\OMEN\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\OMEN\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\OMEN\AppData\Local\Temp\surefire280418647907674740\surefirebooter-20260603232447615_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\OMEN\AppData\Local\Temp\surefire9323518639073001796\surefirebooter-20260604091846922_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.11+9-LTS-211"/>
@@ -58,15 +58,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="commandeRealisable_StockInsuffisant_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="3.181">
+  <testcase name="commandeRealisable_StockInsuffisant_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="2.97">
     <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\OMEN\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="commandeRealisable_StockSuffisant_RetourneTrue" classname="fr.epsi.service.CommandeServiceMockTest" time="0.031"/>
-  <testcase name="commandeRealisable_SansRepository_LeveException" classname="fr.epsi.service.CommandeServiceMockTest" time="0.008"/>
+  <testcase name="commandeRealisable_StockSuffisant_RetourneTrue" classname="fr.epsi.service.CommandeServiceMockTest" time="0.043"/>
+  <testcase name="commandeRealisable_SansRepository_LeveException" classname="fr.epsi.service.CommandeServiceMockTest" time="0.014"/>
   <testcase name="commandeRealisable_StockEgalDemande_RetourneTrue" classname="fr.epsi.service.CommandeServiceMockTest" time="0.006"/>
-  <testcase name="commandeRealisable_StockZero_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="0.003"/>
+  <testcase name="commandeRealisable_StockZero_RetourneFalse" classname="fr.epsi.service.CommandeServiceMockTest" time="0.005"/>
 </testsuite>
